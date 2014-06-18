@@ -196,27 +196,62 @@ class ImageKit {
 
 	private function _resizeGD($config=null) {
 		if (empty($config)) throw new Exception("No config array passed to ImageKit::_resizeGD");
-		$outputDims = $this->_calculateDimensions(array("width"=>$config['sourceWidth'], "height"=>$config['sourceHeight']), array("width"=>$config['outputWidth'], "height"=>$config['outputHeight']), $config['confinement']);
-		$dst_image = imagecreatetruecolor($outputDims['width'], $outputDims['height']);
+		//are there crop dimensions?
+		$doCrop = !empty(array_intersect_key($config['crop'], array("x1"=>1, "x2"=>1, "y1"=>2, "y2"=>3)));
+
+		if ($doCrop) {
+			$src_image = $this->_cropGD($config);
+			// return $this;
+		} else {
+			if ($this->_mimeType=="image/jpeg") {
+				$src_image = imagecreatefromjpeg($config['source']);	
+			} else {
+				$src_image = imagecreatefrompng($config['source']);
+				imageAlphaBlending($src_image,false);
+				imageSaveAlpha($src_image, true);
+			} 
+		}
+			$outputDims = $this->_calculateDimensions(array("width"=>$config['sourceWidth'], "height"=>$config['sourceHeight']), array("width"=>$config['outputWidth'], "height"=>$config['outputHeight']), $config['confinement']);
+			$dst_image = imagecreatetruecolor($outputDims['width'], $outputDims['height']);
+			if ($this->_mimeType!="image/jpeg") {
+				imageAlphaBlending($dst_image,false);
+				imageSaveAlpha($dst_image, true);
+				$transparent = imagecolorallocatealpha($dst_image,255,255,255,127);
+				imagefilledrectangle($dst_image,0,0,$outputDims['width'], $outputDims['height'],$transparent);
+			}
+		$resized = imagecopyresampled($dst_image, $src_image, 0, 0, 0, 0, $outputDims['width'], $outputDims['height'], $config['sourceWidth'], $config['sourceHeight']);
+
+		//write the image
+		$this->_mimeType=="image/jpeg" ? imagejpeg($dst_image, $config['output'], 100) : imagepng($dst_image, $config['output'], 9);
+		imagedestroy($src_image);
+		imagedestroy($dst_image);
+		return $this;
+	}
+
+	private function _cropGD(&$config) {
+		$cropWidth = max(0,(int)$config['crop']['x2'] - (int)$config['crop']['x1']);
+		$cropHeight = max(0,(int)$config['crop']['y2'] - (int)$config['crop']['y1']);
+		if ($cropWidth==0 || $cropHeight==0) throw new Exception("Crop co-ordinates do not form a rectangle: ".http_build_query($config['crop']));
+		$config['sourceWidth'] = $cropWidth;
+		$config['sourceHeight'] = $cropHeight;
+		$dst_image = imagecreatetruecolor($cropWidth, $cropHeight);
 		if ($this->_mimeType=="image/jpeg") {
 			$src_image = imagecreatefromjpeg($config['source']);
 		} else {
 			$src_image = imagecreatefrompng($config['source']);
 			imageAlphaBlending($src_image,false);
 			imageSaveAlpha($src_image, true);
-
 			imageAlphaBlending($dst_image,false);
 			imageSaveAlpha($dst_image, true);
 			$transparent = imagecolorallocatealpha($dst_image,255,255,255,127);
-			imagefilledrectangle($dst_image,0,0,$outputDims['width'], $outputDims['height'],$transparent);
-		} 
-		//see if any crop values are set - the output dimensions will need to be calculated
-		$resized = imagecopyresampled($dst_image, $src_image, 0, 0, 0, 0, $outputDims['width'], $outputDims['height'], $config['sourceWidth'], $config['sourceHeight']);
-		//write the image
-		$this->_mimeType=="image/jpeg" ? imagejpeg($dst_image, $config['output'], 100) : imagepng($dst_image, $config['output'], 9);
+			imagefilledrectangle($dst_image,0,0,$cropWidth, $cropHeight,$transparent);
+		}
+		$cropped = imagecopyresampled($dst_image, $src_image, 0,0,$config['crop']['x1'], $config['crop']['y1'], $cropWidth, $cropHeight,$cropWidth, $cropHeight);
+		//var_dump($cropped); die();
+		// header("Content-type: ".$this->_mimeType);
 		imagedestroy($src_image);
-		imagedestroy($dst_image);
-		return $this;
+		// imagejpeg($dst_image, $this->_outputPath, 100);
+		return $dst_image;
 	}
 
 	private function _calculateDimensions($source, $output, $confinement="width") {
