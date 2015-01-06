@@ -1,0 +1,3 @@
+[submodule "vendor/timbre.js"]
+	path = vendor/timbre.js
+	url = git@github.com:mohayonao/timbre.js.git

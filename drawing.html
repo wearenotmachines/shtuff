@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Drawing</title>
+</head>
+<body>
+	<canvas id="paper" width="800" height="600"></canvas>
+</body>
+	<script type="text/javascript">
+		window.addEventListener("load", function() {
+			var canvas = document.getElementById("paper");
+			var c = canvas.getContext("2d");
+			c.lineWidth = 0.5;
+			c.strokeStyle = "#333";
+			c.translate(0.5,0.5);
+			var click = 0;
+			var startCoords = {};
+			canvas.addEventListener("mousedown", function(e) {
+				click++;
+				startCoords = {
+					x : e.pageX - c.offsetLeft,
+					y : e.pageY - c.offsetTop
+				}
+				c.beginPath();
+				c.moveTo(startCoords.x, startCoords.y);
+			});
+			canvas.addEventListener("mousemove", function(f) {
+				if (!click) return false;
+				c.lineTo(f.pageX - canvas.offsetLeft, f.pageY - canvas.offsetTop);
+				c.stroke();
+			});
+			canvas.addEventListener("mouseup", function() {
+				click--;
+			});
+			canvas.addEventListener("mouseleave", function() {
+				click = 0;
+			});
+		});
+	</script>
+</html>

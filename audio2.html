@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Audio API</title>
+</head>
+<body>
+	<a id="play">Play</a>
+</body>
+</html>
+<script src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	try {
+		window.AudioContext = window.AudioContext || window.webkitAudioContext;
+		var context = new AudioContext();
+		var request = new XMLHttpRequest();
+		request.open('GET', 'meaning.mp3', true);
+		request.responseType = 'arraybuffer';
+		request.onload = function() {
+			context.decodeAudioData(request.response, function(buffer) {
+
+				window.source = context.createBufferSource();
+
+				var delays = {};
+
+				for (var i=0; i<20; i++) {
+					delays[i] = context.createDelay(10);
+					window.source.connect(delays[i]);
+					delays[i].delayTime.value = Math.log(i+1);
+					delays[i].connect(context.destination);
+				}
+				
+				// var delay = context.createDelay(10);
+				// window.source.connect(delay);
+				// delay.delayTime.value = 1;
+				// delay.connect(context.destination);
+				
+				//  var d = context.createDelay(10);
+				//  window.source.connect(d);
+				//  d.delayTime.value = 2;
+				//  d.connect(context.destination);
+				
+				//var d = context.createDelay();
+				//window.source.connect(d);
+				//d.delayTime.value = 18;
+				//d.connect(context.destination);
+
+				window.source.connect(context.destination);
+				window.source.buffer = buffer;
+				window.source.start(4);
+			});
+			$('#play').on("click", function(e) {
+				e.preventDefault();
+				window.source.stop();
+			});
+		}
+		request.send();
+	} catch (e) {
+		console.log(e);
+	}
+
+});
+</script>

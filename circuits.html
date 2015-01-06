@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Circuits</title>
+</head>
+<body>
+	<canvas style="position:relative" id="paper" width="800" height="600"></canvas>
+</body>
+<script type="text/javascript">
+window.addEventListener("load", function() {
+	var counter = 0;
+	var rep = setInterval(function() {
+		var segments = 17;
+		var angle = (360/segments)*Math.PI/180;
+		var minRadius = 140;
+		var maxRadius = 150;
+		var canvas = document.getElementById("paper");
+		var c = canvas.getContext("2d");
+		var centre = { x : canvas.width/2, y : canvas.height/2 };
+		var lineWidth = 0.5;
+		var strokeStyle = "#333333";
+		if (counter>100) clearInterval(rep);
+		var colours = [
+			"#900", "#090", "#009", "#990", "#909", "#099"
+		];
+		//counter++;
+		canvas.width = canvas.width;
+		for (var n=1; n<=10; n++) {
+			c.beginPath();
+			var rand1 = (Math.random()*5)+-10;
+			var rand2 = (Math.random()*5)+-10;
+			centre = { x : (canvas.width/2)+rand1, y : (canvas.height/2)+rand2 };
+			c.fillStyle = colours[(n-1)%colours.length];
+			minRadius = minRadius/n;
+			maxRadius = maxRadius/n;
+			radius = minRadius+(Math.random()*(maxRadius-minRadius));
+			start = {x : centre.x+Math.sin(0)*radius, y : centre.y+Math.cos(0)*radius};
+			c.moveTo(start.x, start.y);
+			for (var i=0; i<segments; i++) {
+				radius = minRadius+(Math.random()*(maxRadius-minRadius));
+				c.lineTo(centre.x+Math.sin(angle*(i+1))*radius, centre.y+Math.cos(angle*(i+1))*radius);
+			}
+			c.lineTo(start.x, start.y);
+			c.fill();
+		}
+	}, 100);
+});
+</script>
+</html>

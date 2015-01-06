@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Audio API</title>
+</head>
+<body>
+	<a id="play">Play</a>
+</body>
+</html>
+<script src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	try {
+		window.AudioContext = window.AudioContext || window.webkitAudioContext;
+		var context = new AudioContext();
+		var request = new XMLHttpRequest();
+		request.open('GET', 'meaning.mp3', true);
+		request.responseType = 'arraybuffer';
+		request.onload = function() {
+			context.decodeAudioData(request.response, function(buffer) {
+
+				window.source = context.createBufferSource();
+				
+				//var delay = context.createDelay(10);
+				//delay.delayTime.value = 3;
+//				delay.connect(context.destination);
+				
+				//var d = context.createDelay(10);
+				//window.source.connect(d);
+				//d.delayTime.value = 2;
+				//d.connect(context.destination);
+
+				var filter = context.createBiquadFilter();
+				//delay.connect(filter);
+				filter.type = 2;
+				filter.frequency.value = 220;
+				filter.Q.value = 0;
+				window.source.connect(filter);
+				filter.connect(context.destination);
+
+				setInterval(function() {
+					filter.Q.value += 1;
+				}, 100);
+
+				//wndow.source.connect(context.destination);
+				window.source.buffer = buffer;
+				window.source.start(0);
+			});
+			$('#play').on("click", function(e) {
+				e.preventDefault();
+				window.source.stop();
+			});
+		}
+		request.send();
+	} catch (e) {
+		console.log(e);
+	}
+
+});
+</script>

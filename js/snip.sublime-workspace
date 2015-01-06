@@ -1,0 +1,239 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"strr",
+				"strrpos"
+			],
+			[
+				"_source",
+				"_sourcePath"
+			],
+			[
+				"_souc",
+				"_sourcePath"
+			],
+			[
+				"_mime",
+				"_mimeType"
+			],
+			[
+				"_sourc",
+				"_sourcePath"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 332.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 507.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/var/www/scratch.local/testimage.php",
+		"/var/www/scratch.local/meetingkit.html",
+		"/var/www/scratch.local/ImageKit.php",
+		"/var/www/scratch.local/info.php",
+		"/var/www/scratch.local/js/meetingkit/MeetingController.js",
+		"/var/www/scratch.local/sounds.json",
+		"/home/alex/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/var/www/scratch.local/audio2.html",
+		"/var/www/scratch.local/audio.html",
+		"/var/www/wdd/projectScoreCards.csv",
+		"/var/www/scratch.local/cloud-storage.php",
+		"/var/www/wdd/trained_1.csv",
+		"/var/www/scratch.local/vendor/google/apiclient/src/Google/Service.php",
+		"/var/www/scratch.local/auth.php",
+		"/var/www/scratch.local/vendor/google/apiclient/src/Google/Service/Storage.php",
+		"/var/www/scratch.local/googleclient.php",
+		"/var/www/scratch.local/vendor/google/apiclient/src/Google/Service/Spectrum.php",
+		"/var/www/scratch.local/src/MyApp/Chat.php",
+		"/var/www/scratch.local/bin/chat-server.php",
+		"/var/www/scratch.local/index.html",
+		"/var/www/scratch.local/player.html",
+		"/var/www/scratch.local/clock.html",
+		"/var/www/scratch.local/composer.json",
+		"/home/alex/appengine-try-php/helloworld.php",
+		"/var/www/scratch.local/vendor/google/apiclient/src/Google/Service/Prediction.php",
+		"/var/www/scratch.local/googleclient2.php",
+		"/var/www/scratch.local/vendor/google/apiclient/src/Google/Client.php",
+		"/var/www/scratch.local/vendor/google/apiclient/src/Google/Model.php",
+		"/var/www/scratch.local/vendor/google/apiclient/src/Google/Collection.php",
+		"/var/www/scratch.local/vendor/autoload.php",
+		"/var/www/scratch.local/MyApp/Chat.php",
+		"/var/www/scratch.local/index.php",
+		"/var/www/scratch.local/vendor/cboden/ratchet/src/Ratchet/Server/IoServer.php",
+		"/var/www/scratch.local/vendor/cboden/ratchet/src/Ratchet/App.php",
+		"/var/www/index.php",
+		"/home/alex/.config/sublime-text-3/Packages/User/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 22.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"wearenotmachines.audio",
+			"wearenotmachines",
+			"wearenotmachines.audio.request",
+			"wearenotmachines.audio.",
+			"this",
+			"moustaches",
+			"moustaches.",
+			"mountains",
+			"mountains_stretch",
+			"dv",
+			"jpg",
+			"pg",
+			",risky",
+			",bad",
+			",good",
+			"Google_Service_Storage_StorageObject",
+			"prediction",
+			"samples",
+			"group"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 21.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "snip.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/Projects/blockr.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 312.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
